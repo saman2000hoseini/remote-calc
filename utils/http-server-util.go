@@ -2,6 +2,7 @@ package utils
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"simpleCalc/model"
 )
@@ -16,5 +17,6 @@ func ServerHandler(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	json.NewEncoder(w).Encode(op.Result)
+	fmt.Println(op.Result)
+	json.NewEncoder(w).Encode(op)
 }
