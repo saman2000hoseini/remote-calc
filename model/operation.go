@@ -3,16 +3,17 @@ package model
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 )
 
 type Operation struct {
 	Operand1 float64 `json:"operand1"`
 	Operand2 float64 `json:"operand2"`
 	Operator string  `json:"operator"`
-	Result float64   `json:"result"`
+	Result   float64 `json:"result"`
 }
 
-func (o Operation) Calculate() error {
+func (o *Operation) Calculate() error {
 	switch o.Operator {
 	case "+":
 		o.Result = o.Operand1 + o.Operand2
@@ -28,10 +29,11 @@ func (o Operation) Calculate() error {
 	return nil
 }
 
-func NewOperation(op string) (*Operation,error) {
+func NewOperation(op string) (*Operation, error) {
 	operation := &Operation{}
-	if err:=json.Unmarshal([]byte(op),operation);err!=nil {
-			return nil,err
+	if err := json.Unmarshal([]byte(op), operation); err != nil {
+		return nil, err
 	}
-	return operation,nil
+	fmt.Println(operation)
+	return operation, nil
 }
