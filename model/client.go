@@ -36,9 +36,8 @@ func (c *Client) Listen() {
 	for {
 		req, err := c.reader.ReadString('\n')
 		if err != nil {
-			panic(err)
 			c.connection.Close()
-                        return
+			return
 		} else {
 			op, err := NewOperation(req)
 			if err != nil {
